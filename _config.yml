@@ -1,0 +1,21 @@
+title: PVH Consultancy
+description: PVH Consultancy. Coming soon.
+url: "https://pvhconsultancy.com"
+
+plugins:
+  - jekyll-sitemap
+
+markdown: kramdown
+
+# Silences Sass deprecation warnings from third-party @use/@import chains.
+sass:
+  quiet_deps: true
+
+# Repo tooling that shouldn't be published as part of the site.
+exclude:
+  - README.md
+  - justfile
+  - package.json
+  - package-lock.json
+  - eslint.config.js
+  - osv-scanner.toml
