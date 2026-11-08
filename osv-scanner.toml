@@ -1,39 +1,7 @@
-# Vulnerabilities below are all in transitive, dev-only dependencies pulled
-# in by @lhci/cli's bundled Puppeteer/Lighthouse (used only to drive headless
-# Chrome for the Lighthouse CI check, never shipped in the built site). No
-# fix is available yet without a breaking downgrade of @lhci/cli - revisit
-# before the dates below and drop any entries that have since been fixed
-# upstream.
-
-[[IgnoredVulns]]
-id = "GHSA-jmr9-qjv8-65gv" # extract-zip, via @lhci/cli -> lighthouse -> puppeteer-core
-ignoreUntil = 2027-01-05
-reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"
-
-[[IgnoredVulns]]
-id = "GHSA-7pqw-9j4j-h8q3" # extract-zip, via @lhci/cli -> lighthouse -> puppeteer-core
-ignoreUntil = 2027-01-05
-reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"
-
-[[IgnoredVulns]]
-id = "GHSA-52f5-9888-hmc6" # tmp, via @lhci/cli -> lighthouse -> puppeteer-core
-ignoreUntil = 2027-01-05
-reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"
-
-[[IgnoredVulns]]
-id = "GHSA-ph9p-34f9-6g65" # tmp, via @lhci/cli -> lighthouse -> puppeteer-core
-ignoreUntil = 2027-01-05
-reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"
-
-[[IgnoredVulns]]
-id = "GHSA-w5hq-g745-h8pq" # uuid, via @lhci/cli -> lighthouse -> puppeteer-core
-ignoreUntil = 2027-01-05
-reason = "Dev-only transitive dependency of @lhci/cli; no fix available without a breaking downgrade"
-
-# The vulnerabilities below are also in transitive, dev-only tooling
-# dependencies (linters and Lighthouse CI), never shipped in the built site.
-# Each either has no fixed release yet or is only fixed in a version outside
-# the range its parent package accepts - revisit before the dates below.
+# The vulnerabilities below are in transitive, dev-only tooling dependencies
+# (linters and Lighthouse CI), never shipped in the built site. Each either
+# has no fixed release yet or is only fixed in a version outside the range its
+# parent package accepts - revisit before the dates below.
 
 [[IgnoredVulns]]
 id = "GHSA-c475-qrg2-pj4r" # basic-ftp, via @lhci/cli -> proxy-agent -> get-uri
@@ -44,11 +12,6 @@ reason = "Dev-only transitive dependency of @lhci/cli; fix is in basic-ftp 6, ou
 id = "GHSA-238p-pmpm-9mq7" # katex, via markdownlint-cli -> markdownlint -> micromark-extension-math
 ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of markdownlint-cli (math syntax only, KaTeX never renders); fix is in katex 0.18, outside micromark-extension-math's ^0.16 range"
-
-[[IgnoredVulns]]
-id = "GHSA-mrhx-c7xc-m3w5" # zod, via @lhci/cli -> lighthouse -> puppeteer-core -> chromium-bidi
-ignoreUntil = 2027-01-05
-reason = "Dev-only transitive dependency of @lhci/cli; fix is in zod 4, outside chromium-bidi's ^3.24.1 range"
 
 [[IgnoredVulns]]
 id = "GHSA-g3hv-75wg-m249" # minimatch, via eslint, markdownlint-cli and pa11y-ci -> globby -> glob
