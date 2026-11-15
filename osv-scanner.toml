@@ -9,6 +9,16 @@ ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of @lhci/cli; fix is in basic-ftp 6, outside get-uri's ^5 range"
 
 [[IgnoredVulns]]
+id = "GHSA-5pm8-86m8-9m6r" # basic-ftp, via @lhci/cli -> proxy-agent -> get-uri
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of @lhci/cli (MLSD listing DoS; Lighthouse CI never fetches ftp:// URLs); fix is in basic-ftp 6.2.4, outside get-uri's ^5 range"
+
+[[IgnoredVulns]]
+id = "GHSA-r4jh-29pc-gfqr" # basic-ftp, via @lhci/cli -> proxy-agent -> get-uri
+ignoreUntil = 2027-01-05
+reason = "Dev-only transitive dependency of @lhci/cli (CR/LF in FTP credentials crash; Lighthouse CI never fetches ftp:// URLs); fix is in basic-ftp 6.2.3, outside get-uri's ^5 range"
+
+[[IgnoredVulns]]
 id = "GHSA-238p-pmpm-9mq7" # katex, via markdownlint-cli -> markdownlint -> micromark-extension-math
 ignoreUntil = 2027-01-05
 reason = "Dev-only transitive dependency of markdownlint-cli (math syntax only, KaTeX never renders); fix is in katex 0.18, outside micromark-extension-math's ^0.16 range"
