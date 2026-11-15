@@ -1,0 +1,109 @@
+---
+layout: default
+title: Work in Ghana
+description: >-
+  Since 2019 Peter Hasler has been supporting the development of mental health
+  care in Ghana's community health clinics and prison services, working with
+  Dangana.
+permalink: /preview/ghana/
+---
+<section class="page-header">
+  <div class="page-header__inner">
+    <p class="eyebrow">Since 2019</p>
+    <h1>Work in Ghana</h1>
+    <p class="page-header__lead">
+      Supporting the development of mental health care in Ghana, West Africa.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="prose">
+    <p>
+      Since 2019 Peter has been working in Ghana to support the development of
+      mental health care in community health clinics and in the prison
+      services of Ghana. It builds on a long record of international mental
+      health service development, including work for Iraq and Egypt.
+    </p>
+
+    <h2>Dangana</h2>
+    <p>
+      Peter is an Associate Consultant with
+      <a href="https://www.dangana.org/">Dangana</a>, a licensed health and
+      social care service in Ghana focused on mental health. Dangana works
+      across Ghana, particularly in the Greater Accra, Ashanti, Northern and
+      Western regions, and its vision is to inspire a cultural shift in Ghana
+      from dependence to independence.
+    </p>
+    <p>
+      Dangana's approach is built on co-design, inclusivity and creativity,
+      and its team includes people with lived experience of mental health
+      challenges. Its work includes:
+    </p>
+    <ul>
+      <li>peer support and peer group facilitation</li>
+      <li>bespoke and accredited training, including leadership programmes,
+        Recovery Star and Mental Health First Aid</li>
+      <li>workplace mental health and wellbeing training</li>
+      <li>mental health rehabilitation programmes</li>
+      <li>criminal justice and substance misuse programmes</li>
+    </ul>
+    <p>
+      <a class="button" href="https://www.dangana.org/">Visit dangana.org</a>
+    </p>
+  </div>
+</section>
+
+{% assign photos = site.data.ghana_media.photos %}
+{% assign videos = site.data.ghana_media.videos %}
+<section class="section section--alt" aria-labelledby="gallery-heading">
+  <div class="section__inner">
+    <h2 id="gallery-heading">Photos and videos</h2>
+
+    {% if photos.size == 0 and videos.size == 0 %}
+    <p class="notice">Photos and videos from Peter's work in Ghana are coming soon.</p>
+    {% endif %}
+
+    {% if photos.size > 0 %}
+    <ul class="gallery">
+      {% for photo in photos %}
+      <li class="gallery__item">
+        <figure>
+          <img src="{{ photo.src | relative_url }}" alt="{{ photo.alt | escape }}"
+               {% if photo.width %}width="{{ photo.width }}"{% endif %}
+               {% if photo.height %}height="{{ photo.height }}"{% endif %}
+               loading="lazy">
+          {% if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}
+        </figure>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if videos.size > 0 %}
+    <ul class="videos">
+      {% for video in videos %}
+      <li class="videos__item">
+        <figure>
+          {% if video.embed %}
+          <div class="videos__frame">
+            <iframe src="{{ video.embed }}" title="{{ video.title | escape }}"
+                    loading="lazy" allowfullscreen
+                    allow="encrypted-media; picture-in-picture"></iframe>
+          </div>
+          {% else %}
+          <video controls preload="metadata"{% if video.poster %} poster="{{ video.poster | relative_url }}"{% endif %}>
+            <source src="{{ video.src | relative_url }}" type="video/mp4">
+            <a href="{{ video.src | relative_url }}">Download &ldquo;{{ video.title }}&rdquo;</a>
+          </video>
+          {% endif %}
+          <figcaption>
+            <strong>{{ video.title }}</strong>{% if video.caption %} &mdash; {{ video.caption }}{% endif %}
+          </figcaption>
+        </figure>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</section>

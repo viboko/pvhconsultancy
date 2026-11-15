@@ -1,17 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} | {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description | strip_html | strip_newlines }}">
+  {%- if page.preview %}
+  <meta name="robots" content="noindex, nofollow">
+  {%- endif %}
 
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:title" content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}">
   <meta property="og:description" content="{{ page.description | default: site.description | strip_html | strip_newlines }}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ page.image | default: '/assets/images/peter-hasler.jpeg' | absolute_url }}">
   <meta name="twitter:card" content="summary">
 
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
@@ -20,8 +25,39 @@
           async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
-  <main id="main" class="container">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  {%- if page.preview %}
+  <p class="preview-banner">Preview &mdash; this site isn't public yet.</p>
+  {%- endif %}
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-header__brand" href="{{ site.navigation.first.url | relative_url }}">
+        <span class="site-header__name">{{ site.title }}</span>
+        <span class="site-header__tagline">{{ site.tagline }}</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          {%- for item in site.navigation %}
+          <li>
+            <a class="site-nav__link" href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+          </li>
+          {%- endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-main">
     {{ content }}
   </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>&copy; {{ site.time | date: "%Y" }} PVH Consultancy Limited. Registered company {{ site.company_number }}.</p>
+      <p><a href="{{ '/preview/contact/' | relative_url }}">Get in touch</a></p>
+    </div>
+  </footer>
 </body>
 </html>

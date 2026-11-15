@@ -1,6 +1,15 @@
 $color-text: #1c2430;
 $color-text-muted: #4a5566;
 $color-bg: #f7f7f5;
+$color-surface: #fff;
+$color-alt-bg: #eceee9;
+$color-border: #d5d9d2;
+$color-accent: #1f5c5a;
+$color-accent-dark: #163f3e;
+$color-accent-soft: #e3eeec;
+$max-width: 70rem;
+$prose-width: 42rem;
+$radius: 0.5rem;
 
 * {
   box-sizing: border-box;
@@ -11,6 +20,10 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
   background: $color-bg;
   color: $color-text;
@@ -25,15 +38,76 @@ body {
   line-height: 1.6;
 }
 
-.container {
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 1rem;
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
+a {
+  color: $color-accent;
+  text-underline-offset: 0.15em;
+
+  &:hover {
+    color: $color-accent-dark;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid $color-accent;
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+}
+
+.skip-link {
+  position: absolute;
+  top: -10rem;
+  left: 1rem;
+  z-index: 10;
+  padding: 0.5rem 1rem;
+  background: $color-accent;
+  color: #fff;
+
+  &:focus {
+    top: 1rem;
+    color: #fff;
+  }
+}
+
+.preview-banner {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background: $color-accent-dark;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+// "Coming soon" holding page at the root (until launch)
+
 .holding {
+  display: grid;
+  flex: 1;
+  place-content: center;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -41,12 +115,381 @@ body {
   margin: 0;
   font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
 }
 
 .holding__status {
   margin: 0.5rem 0 0;
   color: $color-text-muted;
   font-size: clamp(1.125rem, 3vw, 1.5rem);
+}
+
+// Header and navigation
+
+.site-header {
+  border-bottom: 1px solid $color-border;
+  background: $color-surface;
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.site-header__brand {
+  display: flex;
+  flex-direction: column;
+  color: $color-text;
+  text-decoration: none;
+  line-height: 1.3;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.site-header__name {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.site-header__tagline {
+  color: $color-text-muted;
+  font-size: 0.875rem;
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: inline-block;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  color: $color-text;
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    border-bottom-color: $color-border;
+    color: $color-text;
+  }
+
+  &[aria-current="page"] {
+    border-bottom-color: $color-accent;
+    color: $color-accent;
+  }
+}
+
+.site-main {
+  flex: 1;
+}
+
+// Footer
+
+.site-footer {
+  border-top: 1px solid $color-border;
+  background: $color-surface;
+  color: $color-text-muted;
+  font-size: 0.875rem;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  justify-content: space-between;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+
+  p {
+    margin: 0;
+  }
+}
+
+// Shared building blocks
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: $color-accent;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid $color-accent;
+  border-radius: $radius;
+  background: $color-accent;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $color-accent-dark;
+    background: $color-accent-dark;
+    color: #fff;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.button--secondary {
+  background: transparent;
+  color: $color-accent;
+
+  &:hover {
+    background: $color-accent-soft;
+    color: $color-accent-dark;
+  }
+}
+
+.notice {
+  margin: 0 0 1.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid $color-accent;
+  border-radius: $radius;
+  background: $color-accent-soft;
+}
+
+.section {
+  padding: 3rem 1rem;
+}
+
+.section--alt {
+  background: $color-alt-bg;
+}
+
+.section__inner {
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+.prose {
+  max-width: $prose-width;
+  margin: 0 auto;
+  font-size: 1.0625rem;
+
+  h2:not(:first-child) {
+    margin-top: 2.5rem;
+  }
+}
+
+// Home page
+
+.hero {
+  padding: 3rem 1rem;
+  background: $color-surface;
+}
+
+.hero__inner {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  max-width: $max-width;
+  margin: 0 auto;
+
+  @media (width >= 48rem) {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.hero__credentials {
+  display: block;
+  margin-top: 0.5rem;
+  color: $color-text-muted;
+  font-size: 0.45em;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.hero__lead {
+  max-width: 36rem;
+  margin: 1.25rem 0 0;
+  color: $color-text-muted;
+  font-size: 1.1875rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2rem 0 0;
+}
+
+.hero__portrait {
+  justify-self: center;
+  max-width: 22rem;
+  margin: 0;
+
+  img {
+    border-radius: $radius;
+    box-shadow: 0 0.75rem 2rem rgb(28 36 48 / 15%);
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  padding: 1.5rem;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  background: $color-surface;
+
+  p {
+    margin: 0;
+  }
+}
+
+.card__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+}
+
+// Inner page header
+
+.page-header {
+  padding: 3rem 1rem 2rem;
+  background: $color-surface;
+}
+
+.page-header__inner {
+  max-width: $prose-width;
+  margin: 0 auto;
+}
+
+.page-header__lead {
+  margin: 1rem 0 0;
+  color: $color-text-muted;
+  font-size: 1.1875rem;
+}
+
+// Ghana gallery
+
+.gallery,
+.videos {
+  display: grid;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    margin-top: 0.5rem;
+    color: $color-text-muted;
+    font-size: 0.9375rem;
+  }
+}
+
+.gallery {
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+
+  img {
+    width: 100%;
+    border-radius: $radius;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+}
+
+.videos {
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  margin-top: 2rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  video {
+    width: 100%;
+    border-radius: $radius;
+  }
+
+  @media (width < 30rem) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.videos__frame {
+  overflow: hidden;
+  border-radius: $radius;
+  aspect-ratio: 16 / 9;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+// Contact form
+
+.form-wrap {
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.form__field {
+  margin-bottom: 1.25rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.375rem;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid #767d73;
+    border-radius: $radius;
+    background: $color-surface;
+    color: $color-text;
+    font: inherit;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.form__optional {
+  color: $color-text-muted;
+  font-weight: 400;
+}
+
+.form__honeypot {
+  position: absolute;
+  left: -9999px;
 }

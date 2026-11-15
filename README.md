@@ -1,10 +1,32 @@
 # PVH Consultancy
 
 The website for PVH Consultancy. Built with [Jekyll](https://jekyllrb.com).
-For now it's a single holding page.
+The root is a "coming soon" holding page for now. The full site is in
+`preview/` and served at <https://pvhconsultancy.com/preview/> while Peter
+reviews it. It has three pages: a bio of Peter Hasler, his work in Ghana
+(`/preview/ghana/`), and a contact form (`/preview/contact/`). Pages under
+`preview/` are marked noindex, left out of the sitemap, and show a "Preview"
+banner (see `defaults` in `_config.yml`).
+
+To launch: move the files in `preview/` to the root (replacing
+`index.html` and deleting `_layouts/holding.html`), remove `/preview` from
+their permalinks and links and from `navigation` in `_config.yml`, and delete
+the `defaults` block there. `just lint` fails on any link left pointing at
+`/preview/`.
 
 Live at <https://pvhconsultancy.com> (<https://www.pvhconsultancy.com>
 redirects there).
+
+## Content
+
+- **Ghana photos and videos**: add entries to `_data/ghana_media.yml` (the
+  file's comments show the format). Put images in `assets/images/ghana/` and
+  self-hosted videos in `assets/videos/ghana/`, or use a YouTube/Vimeo embed
+  URL. Until there are entries, the page shows a "coming soon" notice.
+- **Contact form**: the form posts to [Formspree](https://formspree.io).
+  Create a form there, then set `formspree_id` in `_config.yml` to the ID at
+  the end of its endpoint URL (`https://formspree.io/f/<id>`). While it's
+  empty the page shows a notice and the submit button is disabled.
 
 ## Running locally
 
