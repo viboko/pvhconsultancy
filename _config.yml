@@ -39,3 +39,5 @@ exclude:
   - package-lock.json
   - eslint.config.js
   - osv-scanner.toml
+  - holding
+  - _site-pages

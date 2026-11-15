@@ -19,6 +19,18 @@ preview: build
 build:
 	bundle exec jekyll build
 
+# Build what GitHub Pages serves while the site is in preview: the holding
+# page at / and the full site, marked noindex, at /preview/
+build-pages:
+	bundle exec jekyll build --source holding --destination _site-pages
+	bundle exec jekyll build --config _config.yml,_config.preview.yml --destination _site-pages/preview
+	mv _site-pages/preview/CNAME _site-pages/CNAME
+	rm -f _site-pages/preview/sitemap.xml _site-pages/preview/robots.txt
+
+# Serve the GitHub Pages build locally (holding page at /, site at /preview/)
+preview-pages: build-pages
+	npx http-server _site-pages -p 4003 -e html
+
 # Lint markdown
 lint-markdown:
 	npx markdownlint-cli "**/*.md" --ignore node_modules --ignore _site --ignore vendor
@@ -34,6 +46,10 @@ lint-js:
 # Lint the built html
 lint-html: build
 	LANG=en_US.UTF-8 bundle exec htmlproofer ./_site --disable-external
+
+# Check links and images in the GitHub Pages build (holding page + /preview/)
+lint-pages: build-pages
+	LANG=en_US.UTF-8 bundle exec htmlproofer ./_site-pages --disable-external
 
 # Check robots.txt, sitemap.xml, and that OG/canonical URLs are absolute
 lint-seo: build
@@ -93,8 +109,8 @@ check-osv-scanner:
 check-security: check-bundler-audit check-osv-scanner
 
 # Lint yaml, markdown, scss and js source files, then check the built html
-lint: lint-markdown lint-scss lint-js lint-html lint-seo
+lint: lint-markdown lint-scss lint-js lint-html lint-seo lint-pages
 
 # Remove build artifacts and caches
 clean:
-	rm -rf _site .jekyll-cache .lighthouseci
+	rm -rf _site _site-pages .jekyll-cache .lighthouseci

@@ -1,0 +1,7 @@
+# Layered on top of _config.yml when building the preview copy of the site
+# served at /preview/ (see `just build-pages`). Delete at launch.
+baseurl: /preview
+
+# Adds <meta name="robots" content="noindex"> to every page and shows the
+# preview banner.
+preview: true

@@ -1,4 +1,5 @@
 _site
+_site-pages
 .DS_Store
 .claude/settings.local.json
 .claude/scheduled_tasks.lock

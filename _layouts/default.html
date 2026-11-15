@@ -6,6 +6,9 @@
 
   <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} | {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description | strip_html | strip_newlines }}">
+  {%- if site.preview %}
+  <meta name="robots" content="noindex, nofollow">
+  {%- endif %}
 
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:type" content="website">
@@ -23,6 +26,10 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
+  {%- if site.preview %}
+  <p class="preview-banner">Preview &mdash; this site isn't public yet.</p>
+  {%- endif %}
 
   <header class="site-header">
     <div class="site-header__inner">

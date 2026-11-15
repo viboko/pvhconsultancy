@@ -7,6 +7,25 @@ It has three pages: a bio of Peter Hasler (home), his work in Ghana
 Live at <https://pvhconsultancy.com> (<https://www.pvhconsultancy.com>
 redirects there).
 
+## Preview mode
+
+While Peter reviews the site, it is live at
+<https://pvhconsultancy.com/preview/>. The root still shows the "coming
+soon" holding page. The deploy workflow runs `just build-pages`, which builds:
+
+- `holding/` (a tiny standalone Jekyll site) at `/`
+- the full site with `_config.preview.yml` layered on at `/preview/`. That
+  config sets `baseurl: /preview`, marks every page `noindex`, and shows a
+  "Preview" banner.
+
+Run `just preview-pages` to serve that combined build at
+<http://localhost:4003>.
+
+To launch at `/`: delete `holding/` and `_config.preview.yml`, remove the
+`build-pages`, `preview-pages` and `lint-pages` recipes (and `lint-pages` from
+`lint`), and in `.github/workflows/deploy.yml` change `just build-pages` back
+to `bundle exec jekyll build` and drop the upload step's `path`.
+
 ## Content
 
 - **Ghana photos and videos**: add entries to `_data/ghana_media.yml` (the

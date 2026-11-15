@@ -1,0 +1,10 @@
+# The "coming soon" holding page served at the site root while the full site
+# is in preview at /preview/. Built on its own by `just build-pages`:
+#   bundle exec jekyll build --source holding --destination _site-pages
+# Delete this folder (and the matching steps in the justfile) at launch.
+title: PVH Consultancy
+description: PVH Consultancy. Coming soon.
+url: "https://pvhconsultancy.com"
+
+plugins:
+  - jekyll-sitemap
