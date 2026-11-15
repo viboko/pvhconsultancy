@@ -29,18 +29,11 @@ jobs:
           ruby-version: "3.4"
           bundler-cache: true
 
-      - uses: extractions/setup-just@v4
-
       - uses: actions/configure-pages@v6
 
-      # While the site is in preview: holding page at /, full site at
-      # /preview/. At launch, switch back to `bundle exec jekyll build` and
-      # drop the `path` below.
-      - run: just build-pages
+      - run: bundle exec jekyll build
 
       - uses: actions/upload-pages-artifact@v5
-        with:
-          path: _site-pages
 
   deploy:
     needs: build

@@ -5,5 +5,10 @@
     "chromeLaunchConfig": {
       "args": ["--no-sandbox"]
     }
-  }
+  },
+  "urls": [
+    "http://localhost:4001/preview/",
+    "http://localhost:4001/preview/ghana/",
+    "http://localhost:4001/preview/contact/"
+  ]
 }

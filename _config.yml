@@ -16,11 +16,23 @@ formspree_id: ""
 # Main navigation, in display order.
 navigation:
   - title: About Peter
-    url: /
+    url: /preview/
   - title: Work in Ghana
-    url: /ghana/
+    url: /preview/ghana/
   - title: Contact
-    url: /contact/
+    url: /preview/contact/
+
+# Until launch, the full site lives under preview/ (served at /preview/) and
+# the root is a "coming soon" page. Pages under preview/ are kept out of the
+# sitemap, marked noindex, and show a "Preview" banner. At launch, move them
+# up to the root, drop /preview from their permalinks, links and the
+# navigation above, and delete this block.
+defaults:
+  - scope:
+      path: preview
+    values:
+      preview: true
+      sitemap: false
 
 plugins:
   - jekyll-sitemap
@@ -39,5 +51,3 @@ exclude:
   - package-lock.json
   - eslint.config.js
   - osv-scanner.toml
-  - holding
-  - _site-pages

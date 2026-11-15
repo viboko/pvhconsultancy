@@ -6,7 +6,7 @@
 
   <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} | {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description | strip_html | strip_newlines }}">
-  {%- if site.preview %}
+  {%- if page.preview %}
   <meta name="robots" content="noindex, nofollow">
   {%- endif %}
 
@@ -27,13 +27,13 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  {%- if site.preview %}
+  {%- if page.preview %}
   <p class="preview-banner">Preview &mdash; this site isn't public yet.</p>
   {%- endif %}
 
   <header class="site-header">
     <div class="site-header__inner">
-      <a class="site-header__brand" href="{{ '/' | relative_url }}">
+      <a class="site-header__brand" href="{{ site.navigation.first.url | relative_url }}">
         <span class="site-header__name">{{ site.title }}</span>
         <span class="site-header__tagline">{{ site.tagline }}</span>
       </a>
@@ -56,7 +56,7 @@
   <footer class="site-footer">
     <div class="site-footer__inner">
       <p>&copy; {{ site.time | date: "%Y" }} PVH Consultancy Limited. Registered company {{ site.company_number }}.</p>
-      <p><a href="{{ '/contact/' | relative_url }}">Get in touch</a></p>
+      <p><a href="{{ '/preview/contact/' | relative_url }}">Get in touch</a></p>
     </div>
   </footer>
 </body>
