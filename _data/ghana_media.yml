@@ -1,0 +1,27 @@
+# Photos and videos shown on the Work in Ghana page (/ghana/).
+#
+# Photos: put the image file in assets/images/ghana/ and add an entry under
+# `photos`. Width and height are the image's pixel dimensions (they stop the
+# page jumping around while images load).
+#
+#   - src: /assets/images/ghana/clinic-visit.jpg
+#     alt: Describe what the photo shows, for screen reader users
+#     caption: Optional caption shown under the photo
+#     width: 1200
+#     height: 800
+#
+# Videos: either a YouTube/Vimeo embed URL, or a self-hosted .mp4 file in
+# assets/videos/ghana/.
+#
+#   - title: Short title (required - used as the iframe's accessible name)
+#     embed: https://www.youtube-nocookie.com/embed/VIDEO_ID
+#     caption: Optional caption
+#
+#   - title: Short title
+#     src: /assets/videos/ghana/training-day.mp4
+#     poster: /assets/images/ghana/training-day-poster.jpg
+#     caption: Optional caption
+
+photos: []
+
+videos: []
