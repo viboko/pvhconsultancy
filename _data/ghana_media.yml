@@ -22,6 +22,20 @@
 #     poster: /assets/images/ghana/training-day-poster.jpg
 #     caption: Optional caption
 
-photos: []
+photos:
+  - src: /assets/images/ghana/school-assembly.jpg
+    alt: >-
+      Rows of secondary school pupils in blue uniforms seated under a large
+      canopy, listening to a talk
+    caption: Pupils at one of the schools Peter supports
+    width: 2000
+    height: 1125
+  - src: /assets/images/ghana/school-library.jpg
+    alt: >-
+      A school library corner with pink and lilac shelves full of children's
+      books
+    caption: A school library in Ghana
+    width: 2000
+    height: 1500
 
 videos: []
