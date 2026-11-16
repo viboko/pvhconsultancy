@@ -1,4 +1,4 @@
-# Photos and videos shown on the Work in Ghana page (/preview/ghana/).
+# Photos and videos shown on the Work in Ghana page (/ghana/).
 #
 # Photos: convert the original with
 #   just optimise-photo ~/Downloads/IMG_1234.jpg assets/images/ghana/clinic-visit
@@ -40,6 +40,20 @@ photos:
       A school library corner with pink and lilac shelves full of children's
       books
     caption: The library at Optimum Prime School Complex, Kasoa
+    width: 1600
+    height: 1200
+  - src: /assets/images/ghana/mount-sinai-talk.webp
+    alt: >-
+      A speaker in a white shirt addresses hundreds of pupils in white
+      uniforms seated in an open-sided hall with a corrugated roof
+    caption: A talk at Mount Sinai Senior High School, Akropong
+    width: 1600
+    height: 1200
+  - src: /assets/images/ghana/mount-sinai-assembly.webp
+    alt: >-
+      A speaker seen from behind facing a packed hall of pupils in white
+      uniforms, many listening closely
+    caption: Pupils at Mount Sinai Senior High School, Akropong
     width: 1600
     height: 1200
 

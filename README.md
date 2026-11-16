@@ -1,18 +1,13 @@
 # PVH Consultancy
 
 The website for PVH Consultancy. Built with [Jekyll](https://jekyllrb.com).
-The root is a "coming soon" holding page for now. The full site is in
-`preview/` and served at <https://pvhconsultancy.com/preview/> while Peter
-reviews it. It has three pages: a bio of Peter Hasler, his work in Ghana
-(`/preview/ghana/`), and a contact form (`/preview/contact/`). Pages under
-`preview/` are marked noindex, left out of the sitemap, and show a "Preview"
-banner (see `defaults` in `_config.yml`).
+It has three pages: a bio of Peter Hasler (`index.html`), his work in Ghana
+(`ghana.html`, at `/ghana/`), and a contact form (`contact.html`, at
+`/contact/`).
 
-To launch: move the files in `preview/` to the root (replacing
-`index.html` and deleting `_layouts/holding.html`), remove `/preview` from
-their permalinks and links and from `navigation` in `_config.yml`, and delete
-the `defaults` block there. `just lint` fails on any link left pointing at
-`/preview/`.
+The site was reviewed at `/preview/` before launch. The pages in `preview/`
+now only redirect those old links to the live pages (using
+`_layouts/redirect.html`), and are left out of the sitemap.
 
 Live at <https://pvhconsultancy.com> (<https://www.pvhconsultancy.com>
 redirects there).

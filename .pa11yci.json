@@ -7,8 +7,8 @@
     }
   },
   "urls": [
-    "http://localhost:4001/preview/",
-    "http://localhost:4001/preview/ghana/",
-    "http://localhost:4001/preview/contact/"
+    "http://localhost:4001/",
+    "http://localhost:4001/ghana/",
+    "http://localhost:4001/contact/"
   ]
 }

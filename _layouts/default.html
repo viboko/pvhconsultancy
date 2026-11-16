@@ -6,9 +6,6 @@
 
   <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} | {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description | strip_html | strip_newlines }}">
-  {%- if page.preview %}
-  <meta name="robots" content="noindex, nofollow">
-  {%- endif %}
 
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta property="og:type" content="website">
@@ -19,6 +16,12 @@
   <meta property="og:image" content="{{ page.image | default: '/assets/images/peter-hasler.jpeg' | absolute_url }}">
   <meta name="twitter:card" content="summary">
 
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="32x32">
+  <link rel="icon" href="{{ '/assets/icons/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | relative_url }}">
+  <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+  <meta name="theme-color" content="#1f5c5a">
+
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
   <script data-goatcounter="https://pvhconsultancy.goatcounter.com/count"
@@ -26,10 +29,6 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  {%- if page.preview %}
-  <p class="preview-banner">Preview &mdash; this site isn't public yet.</p>
-  {%- endif %}
 
   <header class="site-header">
     <div class="site-header__inner">
@@ -56,7 +55,7 @@
   <footer class="site-footer">
     <div class="site-footer__inner">
       <p>&copy; {{ site.time | date: "%Y" }} PVH Consultancy Limited. Registered company {{ site.company_number }}.</p>
-      <p><a href="{{ '/preview/contact/' | relative_url }}">Get in touch</a></p>
+      <p><a href="{{ '/contact/' | relative_url }}">Get in touch</a></p>
     </div>
   </footer>
 </body>
