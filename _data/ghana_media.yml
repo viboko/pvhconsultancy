@@ -1,17 +1,22 @@
-# Photos and videos shown on the Work in Ghana page (/ghana/).
+# Photos and videos shown on the Work in Ghana page (/preview/ghana/).
 #
-# Photos: put the image file in assets/images/ghana/ and add an entry under
-# `photos`. Width and height are the image's pixel dimensions (they stop the
-# page jumping around while images load).
+# Photos: convert the original with
+#   just optimise-photo ~/Downloads/IMG_1234.jpg assets/images/ghana/clinic-visit
+# which writes clinic-visit.webp (full size, shown when the photo is tapped)
+# and clinic-visit-800.webp (thumbnail), and prints their sizes. Then add an
+# entry below pointing at the full-size .webp. Width and height are the
+# full-size file's pixel dimensions (they stop the page jumping while images
+# load).
 #
-#   - src: /assets/images/ghana/clinic-visit.jpg
+#   - src: /assets/images/ghana/clinic-visit.webp
 #     alt: Describe what the photo shows, for screen reader users
 #     caption: Optional caption shown under the photo
-#     width: 1200
-#     height: 800
+#     width: 1600
+#     height: 1067
 #
 # Videos: either a YouTube/Vimeo embed URL, or a self-hosted .mp4 file in
-# assets/videos/ghana/.
+# assets/videos/ghana/. The section heading switches between "Photos",
+# "Videos" and "Photos and videos" depending on what's listed here.
 #
 #   - title: Short title (required - used as the iframe's accessible name)
 #     embed: https://www.youtube-nocookie.com/embed/VIDEO_ID
@@ -22,6 +27,20 @@
 #     poster: /assets/images/ghana/training-day-poster.jpg
 #     caption: Optional caption
 
-photos: []
+photos:
+  - src: /assets/images/ghana/school-assembly.webp
+    alt: >-
+      Rows of secondary school pupils in blue uniforms seated under a large
+      canopy, listening to a talk
+    caption: Pupils at Zion College High School (ZICO), Anloga, Volta Region
+    width: 1600
+    height: 900
+  - src: /assets/images/ghana/school-library.webp
+    alt: >-
+      A school library corner with pink and lilac shelves full of children's
+      books
+    caption: The library at Optimum Prime School Complex, Kasoa
+    width: 1600
+    height: 1200
 
 videos: []

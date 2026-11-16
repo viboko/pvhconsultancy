@@ -3,8 +3,8 @@ layout: default
 title: Work in Ghana
 description: >-
   Since 2019 Peter Hasler has been supporting the development of mental health
-  care in Ghana's community health clinics and prison services, working with
-  Dangana.
+  care in Ghana's community health clinics, prison service and schools,
+  working with Dangana Foundation.
 permalink: /preview/ghana/
 ---
 <section class="page-header">
@@ -26,10 +26,31 @@ permalink: /preview/ghana/
       health service development, including work for Iraq and Egypt.
     </p>
 
-    <h2>Dangana</h2>
+    <h2>Working with schools</h2>
+    <p>
+      Peter is now actively supporting three schools in Ghana with
+      educational programmes on the mental health and wellbeing of pupils and
+      teachers:
+    </p>
+    <ul>
+      <li>Optimum Prime School Complex in Kasoa</li>
+      <li>Mount Sinai Senior High School in Akropong</li>
+      <li>Zion College High School (ZICO) in Anloga, Volta Region</li>
+    </ul>
+
+    <h2>Working with the Ghana Prison Service at Nsawam</h2>
+    <p>
+      The work at Nsawam, led by
+      <a href="https://www.dangana.org/" target="_blank" rel="noopener">Dangana Foundation{% include new-tab.html %}</a>, includes a
+      weekly addiction programme co-produced by former prisoners. The work is
+      now extending to prepare prisoners for their release into the
+      community.
+    </p>
+
+    <h2>Dangana Foundation</h2>
     <p>
       Peter is an Associate Consultant with
-      <a href="https://www.dangana.org/">Dangana</a>, a licensed health and
+      <a href="https://www.dangana.org/" target="_blank" rel="noopener">Dangana Foundation{% include new-tab.html %}</a>, a licensed health and
       social care service in Ghana focused on mental health. Dangana works
       across Ghana, particularly in the Greater Accra, Ashanti, Northern and
       Western regions, and its vision is to inspire a cultural shift in Ghana
@@ -49,7 +70,7 @@ permalink: /preview/ghana/
       <li>criminal justice and substance misuse programmes</li>
     </ul>
     <p>
-      <a class="button" href="https://www.dangana.org/">Visit dangana.org</a>
+      <a class="button" href="https://www.dangana.org/" target="_blank" rel="noopener">Visit dangana.org{% include new-tab.html %}</a>
     </p>
   </div>
 </section>
@@ -58,21 +79,35 @@ permalink: /preview/ghana/
 {% assign videos = site.data.ghana_media.videos %}
 <section class="section section--alt" aria-labelledby="gallery-heading">
   <div class="section__inner">
-    <h2 id="gallery-heading">Photos and videos</h2>
+    {%- if photos.size > 0 and videos.size > 0 %}
+      {%- assign gallery_heading = "Photos and videos" %}
+    {%- elsif videos.size > 0 %}
+      {%- assign gallery_heading = "Videos" %}
+    {%- else %}
+      {%- assign gallery_heading = "Photos" %}
+    {%- endif %}
+    <h2 id="gallery-heading">{{ gallery_heading }}</h2>
 
     {% if photos.size == 0 and videos.size == 0 %}
-    <p class="notice">Photos and videos from Peter's work in Ghana are coming soon.</p>
+    <p class="notice">Photos from Peter's work in Ghana are coming soon.</p>
     {% endif %}
 
     {% if photos.size > 0 %}
     <ul class="gallery">
       {% for photo in photos %}
       <li class="gallery__item">
+        {%- assign thumb = photo.src | replace: ".webp", "-800.webp" %}
         <figure>
-          <img src="{{ photo.src | relative_url }}" alt="{{ photo.alt | escape }}"
-               {% if photo.width %}width="{{ photo.width }}"{% endif %}
-               {% if photo.height %}height="{{ photo.height }}"{% endif %}
-               loading="lazy">
+          <a class="gallery__link" href="{{ photo.src | relative_url }}" data-lightbox
+             {% if photo.caption %}data-caption="{{ photo.caption | escape }}"{% endif %}>
+            <img src="{{ thumb | relative_url }}"
+                 srcset="{{ thumb | relative_url }} 800w, {{ photo.src | relative_url }} 1600w"
+                 sizes="(width >= 70rem) 22rem, (width >= 36rem) 50vw, 100vw"
+                 alt="{{ photo.alt | escape }}"
+                 width="{{ photo.width }}" height="{{ photo.height }}"
+                 loading="lazy">
+            <span class="visually-hidden"> (view full size)</span>
+          </a>
           {% if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}
         </figure>
       </li>
@@ -107,3 +142,7 @@ permalink: /preview/ghana/
     {% endif %}
   </div>
 </section>
+
+{% if photos.size > 0 %}
+<script src="{{ '/assets/js/lightbox.js' | relative_url }}" defer></script>
+{% endif %}
