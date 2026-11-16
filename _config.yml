@@ -11,27 +11,25 @@ company_number: "6758325"
 # Formspree form ID for the contact page (the part after /f/ in the form's
 # endpoint URL, e.g. "xyzabcde"). Leave empty until the form is set up -
 # the contact page shows a notice instead of a working form while it is.
-formspree_id: "xgakaqbv"
+formspree_id: xgakaqbv
 
 # Main navigation, in display order.
 navigation:
   - title: About Peter
-    url: /preview/
+    url: /
   - title: Work in Ghana
-    url: /preview/ghana/
+    url: /ghana/
   - title: Contact
-    url: /preview/contact/
+    url: /contact/
 
-# Until launch, the full site lives under preview/ (served at /preview/) and
-# the root is a "coming soon" page. Pages under preview/ are kept out of the
-# sitemap, marked noindex, and show a "Preview" banner. At launch, move them
-# up to the root, drop /preview from their permalinks, links and the
-# navigation above, and delete this block.
+# The site was previewed under /preview/ before launch. The pages in preview/
+# now just redirect those old links to the live pages, and stay out of the
+# sitemap.
 defaults:
   - scope:
       path: preview
     values:
-      preview: true
+      layout: redirect
       sitemap: false
 
 plugins:

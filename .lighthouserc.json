@@ -2,8 +2,11 @@
   "ci": {
     "collect": {
       "staticDistDir": "_site",
-      "maxAutodiscoverUrls": 0,
-      "staticDirFileDiscoveryDepth": 4,
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/ghana/index.html",
+        "http://localhost/contact/index.html"
+      ],
       "numberOfRuns": 1,
       "settings": {
         "onlyCategories": ["accessibility"],
