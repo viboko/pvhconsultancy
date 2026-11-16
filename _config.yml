@@ -11,7 +11,7 @@ company_number: "6758325"
 # Formspree form ID for the contact page (the part after /f/ in the form's
 # endpoint URL, e.g. "xyzabcde"). Leave empty until the form is set up -
 # the contact page shows a notice instead of a working form while it is.
-formspree_id: ""
+formspree_id: "xgakaqbv"
 
 # Main navigation, in display order.
 navigation:
