@@ -19,6 +19,21 @@ preview: build
 build:
 	bundle exec jekyll build
 
+# Convert a photo for the site to WebP: <dest>.webp (max 1600px wide, for
+# full-size viewing) and <dest>-800.webp (for thumbnails), metadata stripped.
+# e.g. just optimise-photo ~/Downloads/IMG_1234.jpg assets/images/ghana/clinic-visit
+optimise-photo src dest:
+	#!/usr/bin/env bash
+	set -euo pipefail
+	width=$(magick identify -format '%w' "{{src}}[0]")
+	full=$(( width < 1600 ? width : 1600 ))
+	thumb=$(( width < 800 ? width : 800 ))
+	cwebp -quiet -q 80 -metadata none -resize "$full" 0 "{{src}}" -o "{{dest}}.webp"
+	cwebp -quiet -q 80 -metadata none -resize "$thumb" 0 "{{src}}" -o "{{dest}}-800.webp"
+	for f in "{{dest}}.webp" "{{dest}}-800.webp"; do
+		echo "$f: $(magick identify -format '%wx%h' "$f"), $(( $(wc -c < "$f") / 1024 )) KB"
+	done
+
 # Lint markdown
 lint-markdown:
 	npx markdownlint-cli "**/*.md" --ignore node_modules --ignore _site --ignore vendor

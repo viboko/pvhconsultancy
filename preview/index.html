@@ -18,9 +18,12 @@ permalink: /preview/
       </p>
     </div>
     <figure class="hero__portrait">
-      <img src="{{ '/assets/images/peter-hasler.jpeg' | relative_url }}"
+      <img src="{{ '/assets/images/peter-hasler.webp' | relative_url }}"
+           srcset="{{ '/assets/images/peter-hasler-400.webp' | relative_url }} 400w, {{ '/assets/images/peter-hasler.webp' | relative_url }} 776w"
+           sizes="22rem"
            alt="Peter Hasler, smiling, with arms folded"
-           width="776" height="929">
+           width="776" height="929"
+           fetchpriority="high">
     </figure>
   </div>
 </section>
@@ -108,7 +111,7 @@ permalink: /preview/
     </p>
     <p>
       He is an Associate Consultant with
-      <a href="https://www.dangana.org/">Dangana</a>, a licensed health and
+      <a href="https://www.dangana.org/" target="_blank" rel="noopener">Dangana{% include new-tab.html %}</a>, a licensed health and
       social care service in Ghana focused on mental health. Dangana works
       across Greater Accra, Ashanti, Northern and Western regions, with a
       mission of supporting people in their transition from dependence to
