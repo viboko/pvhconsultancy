@@ -14,9 +14,10 @@
 #     width: 1600
 #     height: 1067
 #
-# Videos: either a YouTube/Vimeo embed URL, or a self-hosted .mp4 file in
-# assets/videos/ghana/. The section heading switches between "Photos",
-# "Videos" and "Photos and videos" depending on what's listed here.
+# Videos: either a YouTube/Vimeo embed URL (shown in a list below the
+# photos), or a self-hosted .mp4 file in assets/videos/ghana/. The section
+# heading switches between "Photos", "Videos" and "Photos and videos"
+# depending on what's listed here.
 #
 #   - title: Short title (required - used as the iframe's accessible name)
 #     embed: https://www.youtube-nocookie.com/embed/VIDEO_ID
@@ -24,8 +25,26 @@
 #
 #   - title: Short title
 #     src: /assets/videos/ghana/training-day.mp4
-#     poster: /assets/images/ghana/training-day-poster.jpg
+#     poster: /assets/images/ghana/training-day-poster.webp
+#     thumb: /assets/images/ghana/training-day-thumb.webp
 #     caption: Optional caption
+#     width: 720
+#     height: 1280
+#
+# Self-hosted videos appear as tiles in the photo grid (with a play button)
+# and play in the same full-screen viewer as the photos. The poster is a
+# full frame shown before the video plays; thumb is an 800x600 (4:3) crop
+# for the tile, so it matches the photos - pick a part of a frame without
+# faces or on-screen text in the middle, where the play button sits.
+# Without a thumb, the tile crops the poster. Width and height are the
+# video's pixel dimensions (they size the viewer before the video loads).
+#
+# Keep self-hosted videos small: re-encode phone footage to 720p H.264, e.g.
+#   ffmpeg -i ~/Downloads/IMG_1234.MOV -vf scale=-2:720 -c:v libx264 -crf 30 \
+#     -preset slow -c:a aac -b:a 96k -map_metadata -1 -movflags +faststart \
+#     assets/videos/ghana/training-day.mp4
+# (use scale=720:-2 for portrait video). iPhone HDR footage needs converting
+# to SDR too, or it looks washed out in browsers.
 
 photos:
   - src: /assets/images/ghana/school-assembly.webp
@@ -57,4 +76,10 @@ photos:
     width: 1600
     height: 1200
 
-videos: []
+videos:
+  - title: A visit to Optimum Prime School Complex, Kasoa
+    src: /assets/videos/ghana/optimum-prime-school.mp4
+    poster: /assets/images/ghana/optimum-prime-school-poster.webp
+    thumb: /assets/images/ghana/optimum-prime-school-thumb.webp
+    width: 720
+    height: 1280

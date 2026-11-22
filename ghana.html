@@ -92,46 +92,61 @@ permalink: /ghana/
     <p class="notice">Photos from Peter's work in Ghana are coming soon.</p>
     {% endif %}
 
-    {% if photos.size > 0 %}
+    {%- comment -%}
+      Photos and self-hosted videos share one grid of same-sized tiles and
+      one lightbox. YouTube/Vimeo embeds can't open in the lightbox, so they
+      get their own list below.
+    {%- endcomment -%}
+    {%- assign local_videos = videos | where_exp: "video", "video.src" %}
+    {%- assign embeds = videos | where_exp: "video", "video.embed" %}
+    {%- assign tiles = photos | concat: local_videos %}
+    {% if tiles.size > 0 %}
     <ul class="gallery">
-      {% for photo in photos %}
+      {% for tile in tiles %}
       <li class="gallery__item">
-        {%- assign thumb = photo.src | replace: ".webp", "-800.webp" %}
         <figure>
-          <a class="gallery__link" href="{{ photo.src | relative_url }}" data-lightbox
-             {% if photo.caption %}data-caption="{{ photo.caption | escape }}"{% endif %}>
+          {% if tile.title %}
+          {%- capture video_caption %}{{ tile.title }}{% if tile.caption %} — {{ tile.caption }}{% endif %}{% endcapture %}
+          <a class="gallery__link gallery__link--video" href="{{ tile.src | relative_url }}"
+             data-lightbox="video" data-caption="{{ video_caption | escape }}"
+             data-poster="{{ tile.poster | relative_url }}"
+             data-width="{{ tile.width }}" data-height="{{ tile.height }}">
+            <img src="{{ tile.thumb | default: tile.poster | relative_url }}" alt=""
+                 width="800" height="600" loading="lazy">
+            <span class="gallery__play" aria-hidden="true"></span>
+            <span class="visually-hidden">Play video: {{ tile.title }}</span>
+          </a>
+          <figcaption>{{ tile.title }}{% if tile.caption %} &mdash; {{ tile.caption }}{% endif %}</figcaption>
+          {% else %}
+          {%- assign thumb = tile.src | replace: ".webp", "-800.webp" %}
+          <a class="gallery__link" href="{{ tile.src | relative_url }}" data-lightbox
+             {% if tile.caption %}data-caption="{{ tile.caption | escape }}"{% endif %}>
             <img src="{{ thumb | relative_url }}"
-                 srcset="{{ thumb | relative_url }} 800w, {{ photo.src | relative_url }} 1600w"
+                 srcset="{{ thumb | relative_url }} 800w, {{ tile.src | relative_url }} 1600w"
                  sizes="(width >= 70rem) 22rem, (width >= 36rem) 50vw, 100vw"
-                 alt="{{ photo.alt | escape }}"
-                 width="{{ photo.width }}" height="{{ photo.height }}"
+                 alt="{{ tile.alt | escape }}"
+                 width="{{ tile.width }}" height="{{ tile.height }}"
                  loading="lazy">
             <span class="visually-hidden"> (view full size)</span>
           </a>
-          {% if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}
+          {% if tile.caption %}<figcaption>{{ tile.caption }}</figcaption>{% endif %}
+          {% endif %}
         </figure>
       </li>
       {% endfor %}
     </ul>
     {% endif %}
 
-    {% if videos.size > 0 %}
+    {% if embeds.size > 0 %}
     <ul class="videos">
-      {% for video in videos %}
+      {% for video in embeds %}
       <li class="videos__item">
         <figure>
-          {% if video.embed %}
           <div class="videos__frame">
             <iframe src="{{ video.embed }}" title="{{ video.title | escape }}"
                     loading="lazy" allowfullscreen
                     allow="encrypted-media; picture-in-picture"></iframe>
           </div>
-          {% else %}
-          <video controls preload="metadata"{% if video.poster %} poster="{{ video.poster | relative_url }}"{% endif %}>
-            <source src="{{ video.src | relative_url }}" type="video/mp4">
-            <a href="{{ video.src | relative_url }}">Download &ldquo;{{ video.title }}&rdquo;</a>
-          </video>
-          {% endif %}
           <figcaption>
             <strong>{{ video.title }}</strong>{% if video.caption %} &mdash; {{ video.caption }}{% endif %}
           </figcaption>
@@ -143,6 +158,6 @@ permalink: /ghana/
   </div>
 </section>
 
-{% if photos.size > 0 %}
+{% if tiles.size > 0 %}
 <script src="{{ '/assets/js/lightbox.js' | relative_url }}" defer></script>
 {% endif %}
