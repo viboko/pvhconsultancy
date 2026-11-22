@@ -27,6 +27,7 @@
 #     src: /assets/videos/ghana/training-day.mp4
 #     poster: /assets/images/ghana/training-day-poster.webp
 #     thumb: /assets/images/ghana/training-day-thumb.webp
+#     duration: "1:30"
 #     caption: Optional caption
 #     width: 720
 #     height: 1280
@@ -36,7 +37,8 @@
 # full frame shown before the video plays; thumb is an 800x600 (4:3) crop
 # for the tile, so it matches the photos - pick a part of a frame without
 # faces or on-screen text in the middle, where the play button sits.
-# Without a thumb, the tile crops the poster. Width and height are the
+# Without a thumb, the tile crops the poster. Duration (optional, quoted)
+# is shown on the tile's "Video" label. Width and height are the
 # video's pixel dimensions (they size the viewer before the video loads).
 #
 # Keep self-hosted videos small: re-encode phone footage to 720p H.264, e.g.
@@ -81,5 +83,6 @@ videos:
     src: /assets/videos/ghana/optimum-prime-school.mp4
     poster: /assets/images/ghana/optimum-prime-school-poster.webp
     thumb: /assets/images/ghana/optimum-prime-school-thumb.webp
+    duration: "1:30"
     width: 720
     height: 1280

@@ -18,8 +18,11 @@
   dialog.setAttribute("aria-label", "Gallery viewer");
   dialog.innerHTML =
     '<figure class="lightbox__figure">' +
+    '<div class="lightbox__frame">' +
     '<img class="lightbox__image" alt="">' +
     '<video class="lightbox__video" controls playsinline preload="metadata" hidden></video>' +
+    '<span class="lightbox__spinner" role="status"><span class="visually-hidden">Loading</span></span>' +
+    "</div>" +
     '<figcaption class="lightbox__caption"></figcaption>' +
     "</figure>" +
     '<button type="button" class="lightbox__button lightbox__close" aria-label="Close">&times;</button>' +
@@ -27,6 +30,7 @@
     '<button type="button" class="lightbox__button lightbox__next" aria-label="Next">&rsaquo;</button>';
   document.body.appendChild(dialog);
 
+  var frame = dialog.querySelector(".lightbox__frame");
   var image = dialog.querySelector(".lightbox__image");
   var video = dialog.querySelector(".lightbox__video");
   var caption = dialog.querySelector(".lightbox__caption");
@@ -37,6 +41,23 @@
   if (links.length < 2) {
     prev.hidden = true;
     next.hidden = true;
+  }
+
+  // Shows the spinner (and hides the photo) until the file has loaded.
+  function setLoading(loading) {
+    frame.classList.toggle("is-loading", loading);
+  }
+
+  // The item's aspect ratio, from the tile's data-width/height, so the
+  // frame takes its final size before the file arrives.
+  function setRatio(link) {
+    var width = Number(link.getAttribute("data-width"));
+    var height = Number(link.getAttribute("data-height"));
+    if (width && height) {
+      frame.style.setProperty("--ratio", String(width / height));
+    } else {
+      frame.style.removeProperty("--ratio");
+    }
   }
 
   // Stops the video and drops its source, so it stops downloading too.
@@ -53,16 +74,13 @@
     var isVideo = link.getAttribute("data-lightbox") === "video";
 
     stopVideo();
+    image.removeAttribute("src");
     image.hidden = isVideo;
     video.hidden = !isVideo;
+    setRatio(link);
+    setLoading(true);
 
     if (isVideo) {
-      image.removeAttribute("src");
-      var width = Number(link.getAttribute("data-width"));
-      var height = Number(link.getAttribute("data-height"));
-      if (width && height) {
-        video.style.setProperty("--ratio", String(width / height));
-      }
       var poster = link.getAttribute("data-poster");
       if (poster) {
         video.poster = poster;
@@ -73,18 +91,53 @@
         if (playing && playing.catch) {
           playing.catch(function () {
             // Autoplay refused - the controls are there to start it.
+            if (video.readyState > 0) {
+              setLoading(false);
+            }
           });
         }
       }
     } else {
       var thumb = link.querySelector("img");
-      image.src = link.href;
       image.alt = thumb ? thumb.alt : "";
+      image.src = link.href;
+      // Already in the browser's cache: no load event may follow.
+      if (image.complete && image.naturalWidth) {
+        setLoading(false);
+      }
     }
 
     caption.textContent = link.getAttribute("data-caption") || "";
     caption.hidden = !caption.textContent;
   }
+
+  image.addEventListener("load", function () {
+    setLoading(false);
+  });
+  image.addEventListener("error", function () {
+    setLoading(false);
+  });
+
+  // The video is ready to show once its first frame (or, if it isn't
+  // playing yet, its size and length) has loaded. If it later runs out of
+  // data while playing, the spinner comes back until it can carry on.
+  video.addEventListener("loadedmetadata", function () {
+    if (video.paused) {
+      setLoading(false);
+    }
+  });
+  ["canplay", "playing", "error"].forEach(function (type) {
+    video.addEventListener(type, function () {
+      if (video.getAttribute("src")) {
+        setLoading(false);
+      }
+    });
+  });
+  video.addEventListener("waiting", function () {
+    if (video.getAttribute("src")) {
+      setLoading(true);
+    }
+  });
 
   links.forEach(function (link, index) {
     link.addEventListener("click", function (event) {

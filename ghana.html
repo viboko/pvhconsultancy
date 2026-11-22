@@ -114,12 +114,14 @@ permalink: /ghana/
             <img src="{{ tile.thumb | default: tile.poster | relative_url }}" alt=""
                  width="800" height="600" loading="lazy">
             <span class="gallery__play" aria-hidden="true"></span>
-            <span class="visually-hidden">Play video: {{ tile.title }}</span>
+            <span class="gallery__badge" aria-hidden="true">Video{% if tile.duration %} &middot; {{ tile.duration }}{% endif %}</span>
+            <span class="visually-hidden">Play video: {{ tile.title }}{% if tile.duration %} ({{ tile.duration }}){% endif %}</span>
           </a>
           <figcaption>{{ tile.title }}{% if tile.caption %} &mdash; {{ tile.caption }}{% endif %}</figcaption>
           {% else %}
           {%- assign thumb = tile.src | replace: ".webp", "-800.webp" %}
           <a class="gallery__link" href="{{ tile.src | relative_url }}" data-lightbox
+             data-width="{{ tile.width }}" data-height="{{ tile.height }}"
              {% if tile.caption %}data-caption="{{ tile.caption | escape }}"{% endif %}>
             <img src="{{ thumb | relative_url }}"
                  srcset="{{ thumb | relative_url }} 800w, {{ tile.src | relative_url }} 1600w"
